@@ -1,6 +1,6 @@
 /*
     /Yapılacalaklar/
-    - Reset css eklenecek
+    - Reset css eklenecek+
     - Form tasarımı yapılacak
     - Temel todo işlemleri(ekleme, silme, tikleme) eklenecek
     - Tarih eklenecek(moment.js)

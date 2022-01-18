@@ -5,13 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>todo list</title>
 </head>
 <body>
     <div class="container">
-        emre's todo
+        <div class="todo">
+            <div class="header">
+                <h2 id="date">18.01.22</h2>
+                <span id="task-count">4 Tasks</span>
+                <div class="input">
+                    <input type="text" name="task" class="add-input" placeholder="Add a new Task..." value="" autocomplete="off">
+                    <button class="add-btn">Add</button>
+                </div>
+            </div>
+            <ul  class="list">
+                <li class="card">
+                    <div class="card-left">
+                        <button class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="fas fa-times btn delete-btn"></button>
+                </li>
+                <li class="card">
+                    <div class="card-left">
+                        <button class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="fas fa-times btn delete-btn"></button>
+                </li>
+                <li class="card resolved">
+                    <div class="card-left">
+                        <button class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="fas fa-times btn delete-btn"></button>
+                </li>
+                <li class="card">
+                    <div class="card-left">
+                        <button class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="fas fa-times btn delete-btn"></button>
+                </li>
+            </ul>
+        </div>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>

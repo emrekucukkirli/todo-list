@@ -7,12 +7,12 @@
     border: none;
     border-radius: 0;
     box-sizing: border-box;
-    color: #fff;
+    color: #eee;
 }
 body {
-    /* position: absolute; */
+    position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     font-size: 1rem;
     display: flex;
     justify-content: center;
@@ -44,4 +44,115 @@ button {
     background: transparent;
     border-radius: 0;
     font-size: 0.95rem;
+}
+.container {
+    display: flex;
+    width: 400px;
+    max-height: 80%;
+}
+.todo {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.739);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.216);
+    border-radius: 1rem;
+    overflow-y: hidden;
+}
+.header{
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #eee;
+}
+.header span {
+    font-size: 14px;
+}
+.input {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.add-input {
+    width: 70%;
+}
+.add-btn {
+    padding: 5px 15px;
+    border-radius: 1rem;
+    border: 1px solid #eee;
+    background-color: #eee;
+    color: #333;
+    transition: all .3s ease-in;
+}
+.add-btn:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: #eee;
+}
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #bbbdc750;
+}
+.card-left{
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+.card .card-info .time {
+    opacity: 0.5;
+    font-size: 12px;
+}
+.card-info {
+    overflow-x: hidden;
+}
+.card-info .task {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.card.resolved {
+    background: #b7ddf33d;
+}
+.card.resolved .card-info {
+    opacity: 0.5;
+}
+.card.resolved .card-info .task {
+    text-decoration: line-through;
+}
+.card .resolved-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #bbbdc7;
+    color: #00000000;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.card .resolved-btn.active {
+    background: #6ebb95;
+    color: #ffffff;
+    border-color: #5ea180;
+}
+.resolved .resolved-btn {
+    background: #6ebb95;
+    color: #ffffff;
+    border-color: #5ea180;
+}
+.card .delete-btn {
+    visibility: hidden;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #e75978;
+    color: #e75978;
+    cursor: pointer;
+    transition: all .15s ease-in;
+}
+.card:hover {
+    background: #c4e9ff23;
+}
+.card:hover .delete-btn {
+    visibility: visible;
 }
