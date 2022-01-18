@@ -156,3 +156,6 @@ button {
 .card:hover .delete-btn {
     visibility: visible;
 }
+.del {
+    display: none;
+}

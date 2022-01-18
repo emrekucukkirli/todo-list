@@ -14,14 +14,34 @@
             <div class="header">
                 <h2 id="date">18.01.22</h2>
                 <span id="task-count">4 Tasks</span>
-                <div class="input">
+                <form class="input">
                     <input type="text" name="task" class="add-input" placeholder="Add a new Task..." value="" autocomplete="off">
-                    <button class="add-btn">Add</button>
-                </div>
+                    <button type="submit" class="add-btn">Add</button>
+                </form>
             </div>
             <ul  class="list">
-                <li class="card">
+                <!-- <li class="card">
                     <div class="card-left">
+                        <button name="resolved-btn" class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button name="delete-btn" class="fas fa-times btn delete-btn"></button>
+                </li> -->
+                <!-- <li class="card">
+                    <div class="card-left">
+                        <button class="fas fa-check btn resolved-btn"></button>
+                        <div class="card-info">
+                            <h4 class="task">Task</h4>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="fas fa-times btn delete-btn"></button>
+                </li>
+                <li class="card ">
+                    <div class="card-left resolved">
                         <button class="fas fa-check btn resolved-btn"></button>
                         <div class="card-info">
                             <h4 class="task">Task</h4>
@@ -39,27 +59,7 @@
                         </div>
                     </div>
                     <button class="fas fa-times btn delete-btn"></button>
-                </li>
-                <li class="card resolved">
-                    <div class="card-left">
-                        <button class="fas fa-check btn resolved-btn"></button>
-                        <div class="card-info">
-                            <h4 class="task">Task</h4>
-                            <span class="time">3 hours ago</span>
-                        </div>
-                    </div>
-                    <button class="fas fa-times btn delete-btn"></button>
-                </li>
-                <li class="card">
-                    <div class="card-left">
-                        <button class="fas fa-check btn resolved-btn"></button>
-                        <div class="card-info">
-                            <h4 class="task">Task</h4>
-                            <span class="time">3 hours ago</span>
-                        </div>
-                    </div>
-                    <button class="fas fa-times btn delete-btn"></button>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
