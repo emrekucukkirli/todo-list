@@ -1,17 +1,10 @@
-/*
-    /Yapılacalaklar/
-    - Reset css eklenecek+
-    - Form tasarımı yapılacak+
-    - Temel todo işlemleri(ekleme, silme, tikleme) eklenecek+
-    - Local storage
-*/
 const form = document.querySelector('.input');
 const addInput = document.querySelector('.add-input');
 const todoList = document.querySelector('.list');
 const date = document.querySelector('#date');
 const count = document.querySelector('#task-count');
-eventListeners();
 
+eventListeners();
 
 function eventListeners() {
     form.addEventListener("submit", addTodo);
@@ -63,19 +56,20 @@ function loadTodosUI() {
         addTodoUI(todo);
     })
 }
-function deleteTodoStorage(deleteTodo) {
-    let todos = getTodoStorage();
-    todos.forEach(function(todo){
-        if (todo === deleteTodo) {
-            todos.splice(index);
-        }
-    });
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
+// Hataaaaaaaaaaaa
+// function deleteTodoStorage(deleteTodo) {
+//     let todos = JSON.parse(localStorage.getItem("todos"));
+//     todos.forEach(function(todo,index){
+//         if (todo === deleteTodo) {
+//             todos.splice(index,1);
+//         }
+//     });
+//     localStorage.setItem("todos", JSON.stringify(todos));
+// }
 function deleteTodo(e) {
     if (e.target.name === "delete-btn") {
         e.target.parentElement.remove();
-        deleteTodoStorage(e.target.parentElement);
+        deleteTodoStorage(e.target.parentElement.textContent);
     }
 }
 function resolvedTodo(e) {
