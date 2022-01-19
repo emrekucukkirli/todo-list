@@ -100,10 +100,6 @@ button {
     display: flex;
     align-items: center;
 }
-.card .card-info .time {
-    opacity: 0.5;
-    font-size: 12px;
-}
 .card-info {
     overflow-x: hidden;
 }
@@ -155,7 +151,4 @@ button {
 }
 .card:hover .delete-btn {
     visibility: visible;
-}
-.del {
-    display: none;
 }
