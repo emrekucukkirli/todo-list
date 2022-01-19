@@ -3,43 +3,27 @@
     - Reset css eklenecek+
     - Form tasarımı yapılacak+
     - Temel todo işlemleri(ekleme, silme, tikleme) eklenecek+
-    - Tarih eklenecek(moment.js)
-    - Completed kısmı eklenecek
     - Local storage
-    - DB kaydı(kişisel kullanım için)
 */
 const form = document.querySelector('.input');
 const addInput = document.querySelector('.add-input');
 const todoList = document.querySelector('.list');
 const date = document.querySelector('#date');
-
 eventListeners();
 
 function eventListeners() {
     form.addEventListener("submit", addTodo);
     todoList.addEventListener("click", deleteTodo);
     todoList.addEventListener("click", resolvedTodo);
+    document.addEventListener("DOMContentLoaded", loadTodosUI);
 }
 function addTodo(e){
     const newTodo = addInput.value.trim();
     if(newTodo!=""){
         addTodoUI(newTodo);
+        addTodoStorage(newTodo);
     }
     e.preventDefault();
-}
-function deleteTodo(e) {
-    if (e.target.name === "delete-btn") {
-        e.target.parentElement.remove();
-    }
-}
-function resolvedTodo(e) {
-    if (e.target.name === "resolved-btn") {
-        if (e.target.parentElement.parentElement.className !=='card resolved') {
-            e.target.parentElement.parentElement.classList.add('resolved');
-        } else {
-            e.target.parentElement.parentElement.classList.remove('resolved');
-        }
-    }
 }
 function addTodoUI(newTodo) {    
     let li = document.createElement('li');
@@ -56,6 +40,42 @@ function addTodoUI(newTodo) {
     todoList.appendChild(li);
     addInput.value="";
 }
+function getTodoStorage(newTodo) {
+    let todos;
+    if (localStorage.getItem("todos") === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    return todos;
+}
+function addTodoStorage(newTodo) {
+    let todos = getTodoStorage();
+    todos.push(newTodo);
+    localStorage.setItem("todos",JSON.stringify(todos));
+}
+function loadTodosUI() {
+    let todos = getTodoStorage();
+    
+    todos.forEach(function(todo){
+        addTodoUI(todo);
+    })
+}
+function deleteTodo(e) {
+    if (e.target.name === "delete-btn") {
+        e.target.parentElement.remove();
+    }
+}
+function resolvedTodo(e) {
+    if (e.target.name === "resolved-btn") {
+        if (e.target.parentElement.parentElement.className !=='card resolved') {
+            e.target.parentElement.parentElement.classList.add('resolved');
+        } else {
+            e.target.parentElement.parentElement.classList.remove('resolved');
+        }
+    }
+}
+
 
 var today = new Date();
 var dd = today.getDate();
@@ -71,4 +91,5 @@ if(mm<10)
 } 
 today = dd+'.'+mm+'.'+yyyy;
 date.innerHTML=`${today}`;
+
 
