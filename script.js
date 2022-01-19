@@ -9,7 +9,9 @@ const form = document.querySelector('.input');
 const addInput = document.querySelector('.add-input');
 const todoList = document.querySelector('.list');
 const date = document.querySelector('#date');
+const count = document.querySelector('#task-count');
 eventListeners();
+
 
 function eventListeners() {
     form.addEventListener("submit", addTodo);
@@ -47,6 +49,7 @@ function getTodoStorage(newTodo) {
     } else {
         todos = JSON.parse(localStorage.getItem("todos"));
     }
+    count.innerHTML = `${todos.length} Tasks`;
     return todos;
 }
 function addTodoStorage(newTodo) {
@@ -56,14 +59,23 @@ function addTodoStorage(newTodo) {
 }
 function loadTodosUI() {
     let todos = getTodoStorage();
-    
     todos.forEach(function(todo){
         addTodoUI(todo);
     })
 }
+function deleteTodoStorage(deleteTodo) {
+    let todos = getTodoStorage();
+    todos.forEach(function(todo){
+        if (todo === deleteTodo) {
+            todos.splice(index);
+        }
+    });
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
 function deleteTodo(e) {
     if (e.target.name === "delete-btn") {
         e.target.parentElement.remove();
+        deleteTodoStorage(e.target.parentElement);
     }
 }
 function resolvedTodo(e) {
@@ -75,7 +87,6 @@ function resolvedTodo(e) {
         }
     }
 }
-
 
 var today = new Date();
 var dd = today.getDate();
