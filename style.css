@@ -48,7 +48,7 @@ button {
 .container {
     display: flex;
     width: 400px;
-    max-height: 80%;
+    max-height: 90%;
 }
 .todo {
     width: 100%;
@@ -87,6 +87,19 @@ button {
     cursor: pointer;
     background-color: transparent;
     color: #eee;
+}
+.list {
+    overflow: auto;
+}
+.list::-webkit-scrollbar {
+    width: 8px;
+}
+.list::-webkit-scrollbar-button {
+    height: 5px;
+}
+.list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.216);
+    border-radius: 40px;
 }
 .card {
     display: flex;
@@ -137,7 +150,7 @@ button {
     border-color: #5ea180;
 }
 .card .delete-btn {
-    visibility: hidden;
+    visibility: visible;
     width: 22px;
     height: 22px;
     border-radius: 50%;
@@ -149,6 +162,17 @@ button {
 .card:hover {
     background: #c4e9ff23;
 }
-.card:hover .delete-btn {
-    visibility: visible;
+@media(min-width:768px) {
+    .container{
+        width: 550px;
+        max-height: 85%;
+    }
+}
+@media(min-width:992px){
+    .card .delete-btn {
+        visibility: hidden;
+    }
+    .card:hover .delete-btn {
+        visibility: visible;
+    }
 }
