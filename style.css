@@ -105,7 +105,7 @@ button {
 }
 .card-info .task {
     overflow-x: hidden;
-    white-space: nowrap;
+    white-space: wrap;
     text-overflow: ellipsis;
 }
 .card.resolved {
