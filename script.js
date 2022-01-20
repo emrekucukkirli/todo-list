@@ -5,11 +5,10 @@ const date = document.querySelector('#date');
 const count = document.querySelector('#task-count');
 
 eventListeners();
-
 function eventListeners() {
     form.addEventListener("submit", addTodo);
     todoList.addEventListener("click", deleteTodo);
-    todoList.addEventListener("click", resolvedTodo);
+    todoList.addEventListener("change", resolvedTodo);
     document.addEventListener("DOMContentLoaded", loadTodosUI);
 }
 function addTodo(e){
@@ -22,9 +21,10 @@ function addTodo(e){
 }
 function addTodoUI(newTodo) {    
     let li = document.createElement('li');
+    // <button name="resolved-btn" class="fas fa-check btn resolved-btn"></button>
     li.innerHTML = `
         <div class="card-left">
-            <button name="resolved-btn" class="fas fa-check btn resolved-btn"></button>
+            <input type="checkbox" name="resolve" class="resolve">
             <div class="card-info">
                 <h4 class="task">${newTodo}</h4>
             </div>
@@ -60,20 +60,20 @@ function loadTodosUI() {
 // function deleteTodoStorage(deleteTodo) {
 //     let todos = JSON.parse(localStorage.getItem("todos"));
 //     todos.forEach(function(todo,index){
-//         if (todo === deleteTodo) {
+//         // if (todo === deleteTodo) {
 //             todos.splice(index,1);
-//         }
+//         // }
 //     });
 //     localStorage.setItem("todos", JSON.stringify(todos));
 // }
 function deleteTodo(e) {
     if (e.target.name === "delete-btn") {
         e.target.parentElement.remove();
-        deleteTodoStorage(e.target.parentElement.textContent);
+        // deleteTodoStorage(e.target.parentElement);
     }
 }
 function resolvedTodo(e) {
-    if (e.target.name === "resolved-btn") {
+    if (e.target.name === "resolve") {
         if (e.target.parentElement.parentElement.className !=='card resolved') {
             e.target.parentElement.parentElement.classList.add('resolved');
         } else {

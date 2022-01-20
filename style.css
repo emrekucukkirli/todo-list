@@ -139,7 +139,22 @@ button {
     cursor: pointer;
     margin-right: 10px;
 }
-.card .resolved-btn.active {
+.resolve {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #bbbdc7;
+    color: #00000000;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.resolve:checked {
+    background: #6ebb95 url(img/check.svg) no-repeat center;
+    background-size: 21px;
+    border-color: #5ea180;
+}
+/* .card .resolved-btn.active {
     background: #6ebb95;
     color: #ffffff;
     border-color: #5ea180;
@@ -148,7 +163,7 @@ button {
     background: #6ebb95;
     color: #ffffff;
     border-color: #5ea180;
-}
+} */
 .card .delete-btn {
     visibility: visible;
     width: 22px;
@@ -176,3 +191,5 @@ button {
         visibility: visible;
     }
 }
+
+
