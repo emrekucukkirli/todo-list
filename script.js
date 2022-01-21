@@ -5,18 +5,7 @@ const count = document.querySelector('#task-count');
 
 // We need an array to hold our state
 let items = [];
-// if (items.length === 0) {
-//     const manual = [
-//       {
-//         id: '1',
-//         complete: false,
-//         title: 'Hello!',
-//       },
-//     ];
 
-//     items.push(...manual);
-//     localStorage.setItem('items', JSON.stringify(items));
-// }
 function handleSubmit(e) {
     e.preventDefault();
     // console.log('added!!');
@@ -28,9 +17,7 @@ function handleSubmit(e) {
     //   id: moment(new Date()).format("DD.MM.YYYY - hh:mm"),
       complete: false,
     };
-    // Push the items into our state
     items.push(item);
-    // console.log(`There are now ${items.length} tasks`);
     e.target.reset();
     // fire off a custom event that will tell anyone else who cares that the items have been updated!
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
@@ -64,8 +51,7 @@ function mirrorToLocalStorage() {
     
 }  
 function restoreFromLocalStorage() {
-    // console.info('Restoring from LS');
-    // pull the items from LS
+    // console.info('Restoring from LS');x
     const lsItems = JSON.parse(localStorage.getItem('items'));
     if (lsItems.length === 0) {
         const manual = 
@@ -77,6 +63,7 @@ function restoreFromLocalStorage() {
         items.push(manual);
         localStorage.setItem('items', JSON.stringify(items));
         }
+        // pull the items from LS
     else if (lsItems.length) {
       items.push(...lsItems);
       list.dispatchEvent(new CustomEvent('itemsUpdated'));
@@ -94,11 +81,6 @@ function markAsComplete(id) {
     const itemRef = items.find(item => item.id === id);
     itemRef.complete = !itemRef.complete;
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
-    if (e.target.parentElement.parentElement.className !=='card resolved') {
-        e.target.parentElement.parentElement.classList.add('resolved');
-    } else {
-        e.target.parentElement.parentElement.classList.remove('resolved');
-    }
 } 
 form.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
