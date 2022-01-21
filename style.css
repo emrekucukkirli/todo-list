@@ -19,7 +19,6 @@ body {
     align-items: center;
     background: url(img/gok.jpg) no-repeat center;
 }
-
 input,
 textarea,
 button {
@@ -99,6 +98,7 @@ button {
     align-items: center;
 }
 .card-info {
+    width: calc(100% - 32px);
     overflow-x: hidden;
 }
 .card-info .task {
