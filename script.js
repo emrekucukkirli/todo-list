@@ -1,100 +1,116 @@
 const form = document.querySelector('.input');
 const addInput = document.querySelector('.add-input');
-const todoList = document.querySelector('.list');
-const date = document.querySelector('#date');
+const list = document.querySelector('.list');
 const count = document.querySelector('#task-count');
 
-eventListeners();
-function eventListeners() {
-    form.addEventListener("submit", addTodo);
-    todoList.addEventListener("click", deleteTodo);
-    todoList.addEventListener("change", resolvedTodo);
-    document.addEventListener("DOMContentLoaded", loadTodosUI);
-}
-function addTodo(e){
-    const newTodo = addInput.value.trim();
-    if(newTodo!=""){
-        addTodoUI(newTodo);
-        addTodoStorage(newTodo);
-    }
-    e.preventDefault();
-}
-function addTodoUI(newTodo) {    
-    let li = document.createElement('li');
-    // <button name="resolved-btn" class="fas fa-check btn resolved-btn"></button>
-    li.innerHTML = `
-        <div class="card-left">
-            <input type="checkbox" name="resolve" class="resolve">
-            <div class="card-info">
-                <h4 class="task">${newTodo}</h4>
-            </div>
-        </div>
-        <button name="delete-btn" class="fas fa-times btn delete-btn"></button>
-    `;
-    li.classList.add('card');
-    todoList.appendChild(li);
-    addInput.value="";
-}
-function getTodoStorage(newTodo) {
-    let todos;
-    if (localStorage.getItem("todos") === null) {
-        todos = [];
-    } else {
-        todos = JSON.parse(localStorage.getItem("todos"));
-    }
-    count.innerHTML = `${todos.length} Tasks`;
-    return todos;
-}
-function addTodoStorage(newTodo) {
-    let todos = getTodoStorage();
-    todos.push(newTodo);
-    localStorage.setItem("todos",JSON.stringify(todos));
-}
-function loadTodosUI() {
-    let todos = getTodoStorage();
-    todos.forEach(function(todo){
-        addTodoUI(todo);
-    })
-}
-// Hataaaaaaaaaaaa
-// function deleteTodoStorage(deleteTodo) {
-//     let todos = JSON.parse(localStorage.getItem("todos"));
-//     todos.forEach(function(todo,index){
-//         // if (todo === deleteTodo) {
-//             todos.splice(index,1);
-//         // }
-//     });
-//     localStorage.setItem("todos", JSON.stringify(todos));
+// We need an array to hold our state
+let items = [];
+// if (items.length === 0) {
+//     const manual = [
+//       {
+//         id: '1',
+//         complete: false,
+//         title: 'Hello!',
+//       },
+//     ];
+
+//     items.push(...manual);
+//     localStorage.setItem('items', JSON.stringify(items));
 // }
-function deleteTodo(e) {
-    if (e.target.name === "delete-btn") {
-        e.target.parentElement.remove();
-        // deleteTodoStorage(e.target.parentElement);
-    }
+function handleSubmit(e) {
+    e.preventDefault();
+    // console.log('added!!');
+    const title = addInput.value.trim();
+    if (!title) return;
+    const item = {
+      title,
+      id: Date.now(),
+    //   id: moment(new Date()).format("DD.MM.YYYY - hh:mm"),
+      complete: false,
+    };
+    // Push the items into our state
+    items.push(item);
+    // console.log(`There are now ${items.length} tasks`);
+    e.target.reset();
+    // fire off a custom event that will tell anyone else who cares that the items have been updated!
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
-function resolvedTodo(e) {
-    if (e.target.name === "resolve") {
-        if (e.target.parentElement.parentElement.className !=='card resolved') {
-            e.target.parentElement.parentElement.classList.add('resolved');
-        } else {
-            e.target.parentElement.parentElement.classList.remove('resolved');
+function displayItems() {
+    // console.log(items);
+    const html = items
+      .map(
+        item => `<li class="card">
+            <div class="card-left">
+                <input name="resolve" class="resolve" 
+                value="${item.id}"
+                type="checkbox"
+                ${item.complete && 'checked'}>
+                <div class="card-info">
+                    <h4 class="task">${item.title}</h4>
+                </div>
+            </div>
+            <button aria-label="Remove ${item.title}"
+            value="${item.id}" name="delete-btn" class="fas fa-times btn delete-btn"></button>
+        </li>`
+      )
+      .join('');
+    list.innerHTML = html;
+}
+function mirrorToLocalStorage() {
+    // console.info('Saving todos to localstorage');s
+    localStorage.setItem('items', JSON.stringify(items));
+    count.innerHTML = `${items.length} Tasks`;
+    date.innerHTML = moment(new Date()).format("ddd, DD MMM YYYY");
+    
+}  
+function restoreFromLocalStorage() {
+    // console.info('Restoring from LS');
+    // pull the items from LS
+    const lsItems = JSON.parse(localStorage.getItem('items'));
+    if (lsItems.length === 0) {
+        const manual = 
+          {
+            id: 1,
+            complete: false,
+            title: 'Hello',
+          };
+        items.push(manual);
+        localStorage.setItem('items', JSON.stringify(items));
         }
+    else if (lsItems.length) {
+      items.push(...lsItems);
+      list.dispatchEvent(new CustomEvent('itemsUpdated'));
     }
 }
-
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; 
-var yyyy = today.getFullYear();
-if(dd<10) 
-{
-    dd='0'+dd;
+function deleteItem(id) {
+    // console.log('DELETIENG ITEM', id);
+    // update our items array without this one
+    items = items.filter(item => item.id !== id);
+    // console.log(items);
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
+}
+function markAsComplete(id) {
+    // console.log('Marking as complete', id);
+    const itemRef = items.find(item => item.id === id);
+    itemRef.complete = !itemRef.complete;
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
+    if (e.target.parentElement.parentElement.className !=='card resolved') {
+        e.target.parentElement.parentElement.classList.add('resolved');
+    } else {
+        e.target.parentElement.parentElement.classList.remove('resolved');
+    }
 } 
-if(mm<10) 
-{
-    mm='0'+mm;
-} 
-today = dd+'.'+mm+'.'+yyyy;
-date.innerHTML=`${today}`;
-
-
+form.addEventListener('submit', handleSubmit);
+list.addEventListener('itemsUpdated', displayItems);
+list.addEventListener('itemsUpdated', mirrorToLocalStorage);
+// Event Delegation: We listen or the click on the list <ul> but then delegate the click over to the button if that is what was clicked
+list.addEventListener('click', function(e) {
+    const id = parseInt(e.target.value);
+    if (e.target.matches('button')) {
+      deleteItem(id);
+    }
+    if (e.target.matches('input[type="checkbox"]')) {
+      markAsComplete(id);
+    }
+});
+restoreFromLocalStorage();
