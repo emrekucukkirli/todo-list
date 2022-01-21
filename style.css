@@ -18,27 +18,8 @@ body {
     justify-content: center;
     align-items: center;
     background: url(img/gok.jpg) no-repeat center;
-    /* background: linear-gradient(270deg, #c84630, #9e0031, #ffdc5e, #f75c03) url(img/gok.jpg); */
-    /* background-size: 800% 800%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite; */
 }
-/* @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-} */
+
 input,
 textarea,
 button {
@@ -124,15 +105,6 @@ button {
     overflow-x: hidden;
     white-space: wrap;
     text-overflow: ellipsis;
-}
-.card.resolved {
-    background: #b7ddf33d;
-}
-.card.resolved .card-info {
-    opacity: 0.5;
-}
-.card.resolved .card-info .task {
-    text-decoration: line-through;
 }
 .resolve:checked ~ .card-info {
     opacity: 0.5;
